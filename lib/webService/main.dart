@@ -60,7 +60,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 controller: _cepController,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                    labelText: "Digite um cep"
+                    labelText: "Digite um cep",
+                    hint: Text(
+                        "Ex.: 22222000"
+                    )
                 ),
               ),
               Padding(
