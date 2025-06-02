@@ -41,12 +41,17 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ElevatedButton(
-              child: Text("Ir para segunda tela"),
+              child: Text(
+                  "Ir para segunda tela",
+                style: TextStyle(
+                  fontSize: 25
+                ),
+              ),
               onPressed: (){
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => MultipleScreensSecond()
+                        builder: (context) => MultipleScreensSecond(value: "Samir Ribeiro",)
                     )
                 );
               },

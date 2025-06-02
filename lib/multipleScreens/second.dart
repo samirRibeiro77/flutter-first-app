@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class MultipleScreensSecond extends StatefulWidget {
-  const MultipleScreensSecond({super.key});
+  const MultipleScreensSecond({super.key, this.value});
+
+  final value;
 
   @override
   State<MultipleScreensSecond> createState() => _MultipleScreensSecondState();
@@ -20,7 +22,8 @@ class _MultipleScreensSecondState extends State<MultipleScreensSecond> {
           child: Column(
             children: [
               Text(
-                "Segunda tela",
+                "Bem vindo à segunda tela!"
+                "\n\nValor passado: ${widget.value}",
                 style: Theme.of(context).textTheme.headlineMedium,
               )
             ],
