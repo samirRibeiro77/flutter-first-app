@@ -12,6 +12,10 @@ class MultipleScreens extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.orange),
       ),
+      initialRoute: "/",
+      routes: {
+        "/secundaria" : (context) => MultipleScreensSecond(value: "Samir Ribeiro"),
+      },
       home: const MyHomePage(title: 'Multiplas telas'),
     );
   }
@@ -48,12 +52,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               onPressed: (){
-                Navigator.push(
+                Navigator.pushNamed(context, "/secundaria");
+                /*Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => MultipleScreensSecond(value: "Samir Ribeiro",)
                     )
-                );
+                );*/
               },
             )
           ],
