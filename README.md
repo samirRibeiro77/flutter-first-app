@@ -1,4 +1,4 @@
-# sjr77_first_project
+# SJR-77 // Study projects
 
 Learning Flutter all over again with this new "first" project
 
