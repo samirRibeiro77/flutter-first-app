@@ -52,13 +52,82 @@ class _MyHomePageState extends State<MyHomePage> {
     List<Post> postList = [];
 
     for(var postJson in responseBody) {
-      var post = Post.fromJson(postJson);
-      print(post.toString());
-      postList.add(post);
+      postList.add(Post.fromJson(postJson));
     }
 
     return postList;
   }
+
+  Future<int> _post() async {
+    Post post = Post(77, "Titulo SJR77", "Descrição SJR77");
+    var body = jsonEncode(post.toJson());
+
+    var url = Uri.parse("$_baseUrl/posts");
+    var response = await http.post(
+        url,
+        headers: {
+          "Access-Control-Allow-Origin": "true",
+          "Content-type": "application/json; charset=UTF-8"
+        },
+        body: body
+    );
+
+    print("Salvar: ${response.statusCode} // ${response.body}");
+    return response.statusCode;
+  }
+
+  Future<int> _put() async {
+    Post post = Post(77, "Titulo alterado (put) SJR77", "Descrição alterada (put) SJR77");
+    var body = jsonEncode(post.toJson());
+
+    var url = Uri.parse("$_baseUrl/posts/1");
+    var response = await http.put(
+        url,
+        headers: {
+          "Access-Control-Allow-Origin": "true",
+          "Content-type": "application/json; charset=UTF-8"
+        },
+        body: body
+    );
+
+    print("Atualizar (put): ${response.statusCode} //  ${response.body}");
+    return response.statusCode;
+  }
+
+  Future<int> _patch() async {
+    var body = jsonEncode(
+        {
+          "title": "Titulo alterado SJR77"
+        }
+    );
+
+    var url = Uri.parse("$_baseUrl/posts/1");
+    var response = await http.patch(
+        url,
+        headers: {
+          "Access-Control-Allow-Origin": "true",
+          "Content-type": "application/json; charset=UTF-8"
+        },
+        body: body
+    );
+
+    print("Atualizar (patch): ${response.statusCode} //  ${response.body}");
+    return response.statusCode;
+  }
+
+  Future<int> _delete() async {
+    var url = Uri.parse("$_baseUrl/posts/1");
+    var response = await http.delete(
+        url,
+        headers: {
+          "Access-Control-Allow-Origin": "true"
+        }
+    );
+
+    print("Deletar: ${response.statusCode} //  ${response.body}");
+    return response.statusCode;
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -67,32 +136,95 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: FutureBuilder <List<Post>>(
-          future: _loadPosts(),
-          builder: (context, snapshot) {
-            switch(snapshot.connectionState) {
-              case ConnectionState.done:
-                if(!snapshot.hasError) {
-                  var postList = snapshot.data ?? [];
-                  return ListView.builder(
-                      itemCount: postList.length,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          title: Text(postList[index].title),
-                          subtitle: Text(postList[index].body),
-                          leading: Text(postList[index].userId.toString()),
-                        );
+      body: Container(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                    onPressed: () async {
+                      var statusCode = await _post();
+                      var message = "Erro salvando post";
+                      if (statusCode == 201) {
+                        message = "Post salvo com sucesso";
                       }
-                  );
-                }
-                return Text("Error ${snapshot.error.toString()}");
-              default:
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-            }
-          }
-      ),
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text(message))
+                      );
+                    },
+                    child: Text("Salvar")
+                ),
+                ElevatedButton(
+                    onPressed: () async {
+                      var statusCode = await _patch(); // _patch();
+                      var message = "Erro atualizando post";
+                      if (statusCode == 200) {
+                        message = "Post atualizado com sucesso";
+                      }
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(message))
+                      );
+                    },
+                    child: Text("Atualizar")
+                ),
+                ElevatedButton(
+                    onPressed: () async {
+                      var statusCode = await _delete();
+                      var message = "Erro deletando post";
+                      if (statusCode == 200) {
+                        message = "Post deletado com sucesso";
+                      }
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(message))
+                      );
+                    },
+                    child: Text("Deletar")
+                ),
+              ],
+            ),
+            Expanded(
+                child: FutureBuilder <List<Post>>(
+                    future: _loadPosts(),
+                    builder: (context, snapshot) {
+                      switch(snapshot.connectionState) {
+                        case ConnectionState.done:
+                          if(!snapshot.hasError) {
+                            var postList = snapshot.data ?? [];
+                            return ListView.builder(
+                                itemCount: postList.length,
+                                itemBuilder: (context, index) {
+                                  return ListTile(
+                                    title: Text(postList[index].title),
+                                    subtitle: Text(postList[index].body),
+                                    leading: Text(postList[index].userId.toString()),
+                                  );
+                                }
+                            );
+                          }
+                          return Center(
+                            child: Row(
+                              children: [
+                                Text("Error: ", style: Theme.of(context).textTheme.headlineMedium),
+                                Text(snapshot.error.toString())
+                              ],
+                            ),
+                          );
+                        default:
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                      }
+                    }
+                ),
+            )
+          ],
+        ),
+      )
       /*Container(
         padding: EdgeInsets.only(left: 20, right: 20),
         child: ListView.builder(

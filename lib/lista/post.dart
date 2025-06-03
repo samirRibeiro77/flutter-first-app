@@ -1,26 +1,33 @@
 class Post {
-  late int _userId, _id;
+  late int _userId;
+  late int? id;
   late String _title, _body;
 
-  Post(this._userId, this._id, this._title, this._body);
+  Post(this._userId, this._title, this._body, {this.id});
 
   Post.fromJson(Map<String, dynamic> json){
     _userId = json["userId"];
-    _id = json["id"];
+    id = json["id"];
     _title = json["title"];
     _body = json["body"];
+  }
+
+  Map toJson() {
+    return {
+      "userId": _userId,
+      "title": _title,
+      "body": _body
+    };
   }
 
   get body => _body;
 
   String get title => _title;
 
-  get id => _id;
-
   int get userId => _userId;
 
   @override
   String toString() {
-    return "UserId: $_userId // Id: $_id // Title: $_title // Body: $_body";
+    return "UserId: $_userId // Id: $id // Title: $_title // Body: $_body";
   }
 }
