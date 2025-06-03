@@ -26,17 +26,14 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final _currency = "R\$ ";
-  var _value = "";
 
-  _atualizarValor() async {
+  Future<Map> _atualizarValor() async {
     var url = Uri.parse("https://blockchain.info/ticker");
     var response = await http.get(url);
 
     Map<String, dynamic> body = jsonDecode(response.body);
 
-    setState(() {
-      _value = body["BRL"]["buy"].toString();
-    });
+    return body;
   }
 
   @override
@@ -49,16 +46,34 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Image.asset("images/bitcoin.png"),
-            Padding(
-              padding: EdgeInsets.only(top: 45, bottom: 45),
-              child: Text(
-                _currency + _value,
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headlineLarge,
-              ),
+            FutureBuilder <Map>(
+                future: _atualizarValor(),
+                builder: (context, snapshot) {
+                  var value = "";
+                  switch(snapshot.connectionState) {
+                    case ConnectionState.done:
+                      var data = snapshot.data ?? null;
+                      value = data != null
+                          ? _currency + data["BRL"]["buy"].toString()
+                          : "Erro ao carregar os dados";
+                      break;
+                    default:
+                      value = "Carregando...";
+                      break;
+                  }
+
+                  return Padding(
+                    padding: EdgeInsets.only(top: 45, bottom: 45),
+                    child: Text(
+                      value,
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.headlineLarge,
+                    ),
+                  );
+                }
             ),
             ElevatedButton(
-                onPressed: _atualizarValor,
+                onPressed: (){ setState(() {});},
                 child: Padding(
                   padding: EdgeInsets.all(10),
                   child: Text(
