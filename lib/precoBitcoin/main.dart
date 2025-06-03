@@ -1,0 +1,77 @@
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+class PrecoBitcoin extends StatelessWidget {
+  const PrecoBitcoin({super.key});
+  
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Preço do Bitcoin',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromRGBO(255, 148, 0, 1)),
+      ),
+      home: const MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final _currency = "R\$ ";
+  var _value = "";
+
+  _atualizarValor() async {
+    var url = Uri.parse("https://blockchain.info/ticker");
+    var response = await http.get(url);
+
+    Map<String, dynamic> body = jsonDecode(response.body);
+
+    setState(() {
+      _value = body["BRL"]["buy"].toString();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        padding: EdgeInsets.all(30),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Image.asset("images/bitcoin.png"),
+            Padding(
+              padding: EdgeInsets.only(top: 45, bottom: 45),
+              child: Text(
+                _currency + _value,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.headlineLarge,
+              ),
+            ),
+            ElevatedButton(
+                onPressed: _atualizarValor,
+                child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text(
+                    "Atualizar",
+                    style: TextStyle(
+                        fontSize: 25
+                    ),
+                  ),
+                )
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
