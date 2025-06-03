@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:sjr77_first_project/lista/post.dart';
 
 class AppLista extends StatelessWidget {
   const AppLista({super.key});
@@ -10,7 +14,7 @@ class AppLista extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.brown),
       ),
-      home: const MyHomePage(title: 'Lista aleatória'),
+      home: const MyHomePage(title: 'Lista de posts'),
     );
   }
 }
@@ -25,29 +29,71 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var _itens = [];
+  // var _itens = [];
+  final _baseUrl = "https://jsonplaceholder.typicode.com";
 
-  _carregarList() {
-    _itens = [];
-    for (int i=1 ; i<21 ; i++) {
-      var item = {
-        "title": "Titulo item $i",
-        "subtitle": "Um subtitulo legal pro item $i"
-      };
+  // _carregarList() {
+  //   _itens = [];
+  //   for (int i=1 ; i<21 ; i++) {
+  //     var item = {
+  //       "title": "Titulo item $i",
+  //       "subtitle": "Um subtitulo legal pro item $i"
+  //     };
+  //
+  //     _itens.add(item);
+  //   }
+  // }
 
-      _itens.add(item);
+  Future<List<Post>> _loadPosts() async {
+    var url = Uri.parse("$_baseUrl/posts");
+    var response = await http.get(url, headers: {"Access-Control-Allow-Origin": "true"});
+
+    var responseBody = jsonDecode(response.body);
+    List<Post> postList = [];
+
+    for(var postJson in responseBody) {
+      var post = Post.fromJson(postJson);
+      print(post.toString());
+      postList.add(post);
     }
+
+    return postList;
   }
 
   @override
   Widget build(BuildContext context) {
-    _carregarList();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Container(
+      body: FutureBuilder <List<Post>>(
+          future: _loadPosts(),
+          builder: (context, snapshot) {
+            switch(snapshot.connectionState) {
+              case ConnectionState.done:
+                if(!snapshot.hasError) {
+                  var postList = snapshot.data ?? [];
+                  return ListView.builder(
+                      itemCount: postList.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title: Text(postList[index].title),
+                          subtitle: Text(postList[index].body),
+                          leading: Text(postList[index].userId.toString()),
+                        );
+                      }
+                  );
+                }
+                return Text("Error ${snapshot.error.toString()}");
+              default:
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+            }
+          }
+      ),
+      /*Container(
         padding: EdgeInsets.only(left: 20, right: 20),
         child: ListView.builder(
             itemCount: _itens.length,
@@ -91,7 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
               );
             }
         ),
-      )
+      );*/
     );
   }
 }

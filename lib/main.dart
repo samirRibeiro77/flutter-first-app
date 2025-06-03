@@ -15,6 +15,6 @@ void main() {
   //runApp(const TestingWidgetsApp());
   //runApp(const MultipleScreens());
   // runApp(const WebServices());
-  runApp(const PrecoBitcoin());
-  // runApp(const AppLista());
+  // runApp(const PrecoBitcoin());
+  runApp(const AppLista());
 }
