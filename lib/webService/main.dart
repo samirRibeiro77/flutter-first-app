@@ -44,7 +44,26 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    print("1 - initState");
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    print("2 - didChangeDependencies");
+  }
+
+  @override
+  void didUpdateWidget(covariant MyHomePage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    print("2 - didUpdateWidget");
+  }
+
+  @override
   Widget build(BuildContext context) {
+    print("3 - build");
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -85,5 +104,11 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       )
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    print("4 - dispose");
   }
 }

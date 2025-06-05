@@ -14,7 +14,7 @@ void main() {
   //runApp(const AlcoolGasolina());
   //runApp(const TestingWidgetsApp());
   //runApp(const MultipleScreens());
-  // runApp(const WebServices());
+  runApp(const WebServices());
   // runApp(const PrecoBitcoin());
-  runApp(const AppLista());
+  // runApp(const AppLista());
 }
