@@ -27,7 +27,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  _retrieveDatabase() async {
+  Future<Database> _retrieveDatabase() async {
     final dbPath = await getDatabasesPath();
     final localDb = join(dbPath, "database.db");
 
@@ -36,16 +36,37 @@ class _MyHomePageState extends State<MyHomePage> {
       version: 1,
       onCreate: (db, currentVersion) {
         var sql =
-            "CREATE TABLE users (id INTEGER PRIMARY KEY AUTOINCREMENT, nome VARCHAR, idade INTEGER)";
+            "CREATE TABLE users (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, age INTEGER)";
         db.execute(sql);
       },
     );
   }
 
+  _saveUser() async {
+    var db = await _retrieveDatabase();
+    var user = {
+      "name": "User",
+      "age": 15
+    };
+
+    var id = await db.insert("users", user);
+  }
+
+  _listUsers() async {
+    var db = await _retrieveDatabase();
+
+    var sql = "SELECT * FROM users";
+    List users = await db.rawQuery(sql);
+
+    for(var user in users) {
+      print("Users: ${user.toString()}");
+    }
+  }
+
   @override
   void initState() {
     super.initState();
-    _retrieveDatabase();
+    _listUsers();
   }
 
   @override
