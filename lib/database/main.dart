@@ -45,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
   _saveUser() async {
     var db = await _retrieveDatabase();
     var user = {
-      "name": "User",
+      "name": "testUser",
       "age": 15
     };
 
@@ -63,9 +63,40 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  _getUserById(int id) async {
+    var db = await _retrieveDatabase();
+
+    List users = await db.query(
+        "users",
+        columns: ["id", "name", "age"],
+        where: "id = ?",
+        whereArgs: [id]
+    );
+
+    for(var user in users) {
+      print("Users: ${user.toString()}");
+    }
+  }
+
+  _deleteUser(String name) async {
+    var db = await _retrieveDatabase();
+
+    int quantity = await db.delete(
+      "users",
+        where: "name = ?",
+        whereArgs: [name]
+    );
+
+    print("Quantidade de usuários deletados: $quantity");
+  }
+
   @override
   void initState() {
     super.initState();
+    // _saveUser();
+    // _getUserById(1);
+    // _deleteUser("testUser");
+
     _listUsers();
   }
 
