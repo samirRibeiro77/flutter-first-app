@@ -27,6 +27,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List _usersFromDb = [];
+  
   Future<Database> _retrieveDatabase() async {
     final dbPath = await getDatabasesPath();
     final localDb = join(dbPath, "database.db");
@@ -42,24 +44,28 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  _saveUser() async {
+  Future<int> _saveUser() async {
     var db = await _retrieveDatabase();
     var user = {
       "name": "testUser",
       "age": 15
     };
 
-    var id = await db.insert("users", user);
+    _listUsers();
+    return await db.insert("users", user);
   }
 
   _listUsers() async {
+    _usersFromDb = [];
     var db = await _retrieveDatabase();
 
     var sql = "SELECT * FROM users";
     List users = await db.rawQuery(sql);
 
     for(var user in users) {
-      print("Users: ${user.toString()}");
+      setState(() {
+        _usersFromDb.add(user);
+      });
     }
   }
 
@@ -87,7 +93,27 @@ class _MyHomePageState extends State<MyHomePage> {
         whereArgs: [name]
     );
 
+    _listUsers();
     print("Quantidade de usuários deletados: $quantity");
+  }
+  
+  _updateUser(int id) async {
+    var db = await _retrieveDatabase();
+
+    var user = {
+      "name": "testUserUpdated",
+      "age": 55
+    };
+
+    int quantity = await db.update(
+        "users",
+        user,
+        where: "id = ?",
+        whereArgs: [id]
+    );
+
+    _listUsers();
+    print("Quantidade de usuários atualizados: $quantity");
   }
 
   @override
@@ -96,6 +122,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // _saveUser();
     // _getUserById(1);
     // _deleteUser("testUser");
+    // _updateUser(6);
 
     _listUsers();
   }
@@ -107,7 +134,19 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Container(padding: EdgeInsets.all(16), child: Column()),
+      body: Container(
+          padding: EdgeInsets.all(16),
+          child: ListView.builder(
+            itemCount: _usersFromDb.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(_usersFromDb[index]["name"]),
+                  subtitle: Text(_usersFromDb[index]["age"].toString()),
+                  leading: Text(_usersFromDb[index]["id"].toString()),
+                );
+              }
+          ),
+      ),
     );
   }
 }
