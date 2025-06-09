@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sjr77_first_project/alcoolGasolina/main.dart';
+import 'package:sjr77_first_project/appAbas/main.dart';
 import 'package:sjr77_first_project/database/main.dart';
 import 'package:sjr77_first_project/executaMidia/main.dart';
 import 'package:sjr77_first_project/jokenpo/main.dart';
@@ -22,5 +23,6 @@ void main() {
   // runApp(const AppLista());
   // runApp(const SharedPrefs());
   // runApp(const AppDatabase());
-  runApp(const ExecMedia());
+  // runApp(const ExecMedia());
+  runApp(const AppAbas());
 }
