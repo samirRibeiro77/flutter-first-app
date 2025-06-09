@@ -10,6 +10,7 @@ import 'package:sjr77_first_project/precoBitcoin/main.dart';
 import 'package:sjr77_first_project/sharedPreferences/main.dart';
 import 'package:sjr77_first_project/testingWidgets/main.dart';
 import 'package:sjr77_first_project/frasesDoDia/main.dart';
+import 'package:sjr77_first_project/videoPlayer/main.dart';
 import 'package:sjr77_first_project/webService/main.dart';
 
 void main() {
@@ -24,5 +25,6 @@ void main() {
   // runApp(const SharedPrefs());
   // runApp(const AppDatabase());
   // runApp(const ExecMedia());
-  runApp(const AppAbas());
+  // runApp(const AppAbas());
+  runApp(const AppVideoPlayer());
 }

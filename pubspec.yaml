@@ -38,6 +38,7 @@ dependencies:
   shared_preferences: ^2.5.3
   sqflite: ^2.4.2
   audioplayers: ^6.4.0
+  video_player: ^2.10.0
 
 dev_dependencies:
   flutter_test:
@@ -78,6 +79,7 @@ flutter:
     - assets/images/pausar.png
     - assets/audios/bach.mp3
     - assets/audios/musica.mp3
+    - videos/exemplo.mp4
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
