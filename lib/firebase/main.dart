@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -30,14 +32,53 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final _db = FirebaseFirestore.instance;
+
+  _usingFirebase() async {
+    // _db.collection("users").doc("002").set({
+    //   "name": "Vanessa",
+    //   "age": "30"
+    // });
+
+    // var ref = await _db.collection("news").add({
+    //   "title": "Heat waves in São Paulo",
+    //   "description": "Some descriptions goes here..."
+    // });
+    // print("Saved item: ${ref.id}");
+
+    // _db.collection("users").doc("001").get().then((doc) {
+    //     final data = doc.data() as Map<String, dynamic>;
+    //     print("Document: $data");
+    //   },
+    //   onError: (e) => print("Error getting document: $e"),
+    // );
+
+    // _db.collection("users").get().then((querySnapshot) {
+    //     for (var docSnapshot in querySnapshot.docs) {
+    //       print('${docSnapshot.id} => ${docSnapshot.data()}');
+    //     }
+    //   },
+    //   onError: (e) => print("Error completing: $e"),
+    // );
+
+    // _db.collection("users").snapshots().listen((snapshot) {
+    //   for (var docSnapshot in snapshot.docs) {
+    //     print('${docSnapshot.id} => ${docSnapshot.data()}');
+    //   }
+    // },
+    // onError: (error) => print("Listen failed: $error"),
+    // );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    Firebase.initializeApp();
+  }
 
   @override
   Widget build(BuildContext context) {
-    Firebase.initializeApp();
-    FirebaseFirestore.instance
-        .collection("users")
-        .doc("score")
-        .set({"Samir" : "250", "Vanessa": "590"});
+    _usingFirebase();
 
     return Scaffold(
       appBar: AppBar(
