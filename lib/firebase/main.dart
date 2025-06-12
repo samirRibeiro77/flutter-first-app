@@ -69,8 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // onError: (error) => print("Listen failed: $error"),
     // );
 
-    _db
-        .collection("users")
+    _db.collection("users")
         // .where("name", isEqualTo: "Vanessa")
         .where("age", isGreaterThan: "29")
         .where("age", isLessThan: "40")
