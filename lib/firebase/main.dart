@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -69,19 +67,30 @@ class _MyHomePageState extends State<MyHomePage> {
     // onError: (error) => print("Listen failed: $error"),
     // );
 
+    // _db.collection("users")
+    //     // .where("name", isEqualTo: "Vanessa")
+    //     .where("age", isGreaterThan: "29")
+    //     .where("age", isLessThan: "40")
+    //     .orderBy("age", descending: true)
+    //     .orderBy("name", descending: false)
+    //     .limit(2)
+    //     .get()
+    //     .then((querySnapshot) {
+    //       for (var docSnapshot in querySnapshot.docs) {
+    //         print('${docSnapshot.id} => ${docSnapshot.data()}');
+    //       }
+    //     }, onError: (e) => print("Error completing: $e"));
+
+    var search = "Marc";
     _db.collection("users")
-        // .where("name", isEqualTo: "Vanessa")
-        .where("age", isGreaterThan: "29")
-        .where("age", isLessThan: "40")
-        .orderBy("age", descending: true)
-        .orderBy("name", descending: false)
-        .limit(2)
+        .where("name", isGreaterThanOrEqualTo: search)
+        .where("name", isLessThanOrEqualTo: "$search\uf8ff")
         .get()
         .then((querySnapshot) {
-          for (var docSnapshot in querySnapshot.docs) {
-            print('${docSnapshot.id} => ${docSnapshot.data()}');
-          }
-        }, onError: (e) => print("Error completing: $e"));
+      for (var docSnapshot in querySnapshot.docs) {
+        print('${docSnapshot.id} => ${docSnapshot.data()}');
+      }
+    }, onError: (e) => print("Error completing: $e"));
   }
 
   @override
