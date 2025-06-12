@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:sjr77_first_project/alcoolGasolina/main.dart';
 import 'package:sjr77_first_project/appAbas/main.dart';
@@ -13,7 +14,15 @@ import 'package:sjr77_first_project/frasesDoDia/main.dart';
 import 'package:sjr77_first_project/videoPlayer/main.dart';
 import 'package:sjr77_first_project/webService/main.dart';
 
-void main() {
+import 'firebase/main.dart';
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   //runApp(const FrasesDoDia());
   //runApp(const Jokenpo());
   //runApp(const AlcoolGasolina());
@@ -26,5 +35,6 @@ void main() {
   // runApp(const AppDatabase());
   // runApp(const ExecMedia());
   // runApp(const AppAbas());
-  runApp(const AppVideoPlayer());
+  // runApp(const AppVideoPlayer());
+  runApp(const AppFirebase());
 }
