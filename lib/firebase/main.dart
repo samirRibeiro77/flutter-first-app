@@ -68,6 +68,21 @@ class _MyHomePageState extends State<MyHomePage> {
     // },
     // onError: (error) => print("Listen failed: $error"),
     // );
+
+    _db
+        .collection("users")
+        // .where("name", isEqualTo: "Vanessa")
+        .where("age", isGreaterThan: "29")
+        .where("age", isLessThan: "40")
+        .orderBy("age", descending: true)
+        .orderBy("name", descending: false)
+        .limit(2)
+        .get()
+        .then((querySnapshot) {
+          for (var docSnapshot in querySnapshot.docs) {
+            print('${docSnapshot.id} => ${docSnapshot.data()}');
+          }
+        }, onError: (e) => print("Error completing: $e"));
   }
 
   @override
