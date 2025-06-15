@@ -6,6 +6,7 @@ import 'package:sjr77_first_project/database/main.dart';
 import 'package:sjr77_first_project/executaMidia/main.dart';
 import 'package:sjr77_first_project/jokenpo/main.dart';
 import 'package:sjr77_first_project/lista/main.dart';
+import 'package:sjr77_first_project/medicalGemini/main.dart';
 import 'package:sjr77_first_project/multipleScreens/first.dart';
 import 'package:sjr77_first_project/precoBitcoin/main.dart';
 import 'package:sjr77_first_project/sharedPreferences/main.dart';
@@ -36,5 +37,6 @@ void main() async {
   // runApp(const ExecMedia());
   // runApp(const AppAbas());
   // runApp(const AppVideoPlayer());
-  runApp(const AppFirebase());
+  // runApp(const AppFirebase());
+  runApp(const MedicalChat());
 }
