@@ -33,6 +33,9 @@ migrate_working_dir/
 .pub/
 /build/
 
+# Api Keys
+**/keys.dart
+
 # Symbolication related
 app.*.symbols
 

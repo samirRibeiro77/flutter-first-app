@@ -401,6 +401,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.10.14"
+  firebase_vertexai:
+    dependency: transitive
+    description:
+      name: firebase_vertexai
+      sha256: "41f4ccf4fdafd00c5387699b3ae0b11eb6c9b37225f184cbf7ea9e5d2ca9a06b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.8.0"
   fixnum:
     dependency: transitive
     description:
@@ -418,10 +426,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_ai_toolkit
-      sha256: "43f73c8622aa26037a8b3345359467e3b30a2b1ded962c9b95b96b00645e9b01"
+      sha256: "6da24e3dcdc827f09e39049e5a8c82da97ec93bede6673ce4383ff1cd5f518f8"
       url: "https://pub.dev"
     source: hosted
-    version: "0.9.0"
+    version: "0.6.8"
   flutter_context_menu:
     dependency: transitive
     description:
@@ -438,14 +446,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.0"
-  flutter_markdown_plus:
+  flutter_markdown:
     dependency: transitive
     description:
-      name: flutter_markdown_plus
-      sha256: fe74214c5ac2f850d93efda290dcde3f18006e90a87caa9e3e6c13222a5db4de
+      name: flutter_markdown
+      sha256: "08fb8315236099ff8e90cb87bb2b935e0a724a3af1623000a9cec930468e0f27"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.3"
+    version: "0.7.7+1"
   flutter_picture_taker:
     dependency: transitive
     description:
