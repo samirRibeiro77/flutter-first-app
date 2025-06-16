@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -31,8 +32,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final _db = FirebaseFirestore.instance;
+  final _auth = FirebaseAuth.instance;
 
-  _usingFirebase() async {
+  _usingFirestore() async {
     // _db.collection("users").doc("002").set({
     //   "name": "Vanessa",
     //   "age": "30"
@@ -82,26 +84,43 @@ class _MyHomePageState extends State<MyHomePage> {
     //     }, onError: (e) => print("Error completing: $e"));
 
     var search = "Marc";
-    _db.collection("users")
+    _db
+        .collection("users")
         .where("name", isGreaterThanOrEqualTo: search)
         .where("name", isLessThanOrEqualTo: "$search\uf8ff")
         .get()
         .then((querySnapshot) {
-      for (var docSnapshot in querySnapshot.docs) {
-        print('${docSnapshot.id} => ${docSnapshot.data()}');
-      }
-    }, onError: (e) => print("Error completing: $e"));
+          for (var docSnapshot in querySnapshot.docs) {
+            print('${docSnapshot.id} => ${docSnapshot.data()}');
+          }
+        }, onError: (e) => print("Error completing: $e"));
+  }
+
+  _usingAuth() async {
+    final email = "samir@apptest.com";
+    final password = "123456";
+
+    _auth
+        .createUserWithEmailAndPassword(email: email, password: password)
+        .then((fbUser) {
+          print("New user => ${fbUser.user?.email} / ${fbUser.toString()}");
+        })
+        .catchError((e) {
+          print("Error creating new user: ${e.toString()}");
+        });
+
+    final currentUser = _auth.currentUser;
   }
 
   @override
   void initState() {
     super.initState();
-    Firebase.initializeApp();
+    _usingAuth();
   }
 
   @override
   Widget build(BuildContext context) {
-    _usingFirebase();
+    _usingFirestore();
 
     return Scaffold(
       appBar: AppBar(

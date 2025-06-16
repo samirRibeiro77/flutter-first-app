@@ -37,6 +37,6 @@ void main() async {
   // runApp(const ExecMedia());
   // runApp(const AppAbas());
   // runApp(const AppVideoPlayer());
-  // runApp(const AppFirebase());
-  runApp(const MedicalChat());
+  runApp(const AppFirebase());
+  // runApp(const MedicalChat());
 }
