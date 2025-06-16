@@ -100,16 +100,22 @@ class _MyHomePageState extends State<MyHomePage> {
     final email = "samir@apptest.com";
     final password = "123456";
 
-    _auth
-        .createUserWithEmailAndPassword(email: email, password: password)
-        .then((fbUser) {
-          print("New user => ${fbUser.user?.email} / ${fbUser.toString()}");
-        })
-        .catchError((e) {
-          print("Error creating new user: ${e.toString()}");
-        });
+    // _auth
+    //     .createUserWithEmailAndPassword(email: email, password: password)
+    //     .then((fbUser) {
+    //       print("New user => ${fbUser.user?.email} / ${fbUser.toString()}");
+    //     })
+    //     .catchError((e) {
+    //       print("Error creating new user: ${e.toString()}");
+    //     });
 
     final currentUser = _auth.currentUser;
+    if (currentUser != null) {
+      print("User => ${currentUser.email}");
+    }
+    else {
+      print("No user loged in");
+    }
   }
 
   @override
