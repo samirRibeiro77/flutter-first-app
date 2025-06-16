@@ -45,5 +45,9 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDescription </key>
+    <string>Necessário permissão para acessar a galera de fotos</string>
+    <key>NSPhotoLibraryUsageDescription </key>
+    <string>Necessário permissão para acessar camera</string>
 </dict>
 </plist>

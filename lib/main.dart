@@ -4,6 +4,7 @@ import 'package:sjr77_first_project/alcoolGasolina/main.dart';
 import 'package:sjr77_first_project/appAbas/main.dart';
 import 'package:sjr77_first_project/database/main.dart';
 import 'package:sjr77_first_project/executaMidia/main.dart';
+import 'package:sjr77_first_project/imagePicker/main.dart';
 import 'package:sjr77_first_project/jokenpo/main.dart';
 import 'package:sjr77_first_project/lista/main.dart';
 import 'package:sjr77_first_project/medicalGemini/main.dart';
@@ -37,6 +38,8 @@ void main() async {
   // runApp(const ExecMedia());
   // runApp(const AppAbas());
   // runApp(const AppVideoPlayer());
-  runApp(const AppFirebase());
+  // runApp(const AppFirebase());
+  runApp(const AppImagePicker());
+
   // runApp(const MedicalChat());
 }
