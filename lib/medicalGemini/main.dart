@@ -31,7 +31,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,23 +41,25 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: true,
       ),
       body: LlmChatView(
-          suggestions: MedicalChatConfigs.suggestions,
-          style: LlmChatViewStyle(
-            chatInputStyle: ChatInputStyle(
-              hintText: MedicalChatConfigs.messageHint,
-              decoration: const BoxDecoration().copyWith(
-                borderRadius: BorderRadius.circular(50),
-              ),
+        suggestions: MedicalChatConfigs.suggestions,
+        style: LlmChatViewStyle(
+          chatInputStyle: ChatInputStyle(
+            hintText: MedicalChatConfigs.messageHint,
+            decoration: const BoxDecoration().copyWith(
+              borderRadius: BorderRadius.circular(50),
             ),
           ),
-          provider: GeminiProvider(
-            model: GenerativeModel(
-              model: MedicalChatConfigs.geminiModel,
-              apiKey: ApiKeys.gemini,
-              systemInstruction: Content.system(MedicalChatConfigs.systemInstruction),
+        ),
+        provider: GeminiProvider(
+          model: GenerativeModel(
+            model: MedicalChatConfigs.geminiModel,
+            apiKey: ApiKeys.gemini,
+            systemInstruction: Content.system(
+              MedicalChatConfigs.systemInstruction,
             ),
           ),
-          welcomeMessage: MedicalChatConfigs.welcomeMessage
+        ),
+        welcomeMessage: MedicalChatConfigs.welcomeMessage,
       ),
     );
   }
