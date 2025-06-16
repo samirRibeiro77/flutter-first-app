@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class AppFirebase extends StatelessWidget {
@@ -99,6 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
   _usingAuth() async {
     final email = "samir@apptest.com";
     final password = "123456";
+    final signInPassword = "12345";
 
     // _auth
     //     .createUserWithEmailAndPassword(email: email, password: password)
@@ -109,11 +109,21 @@ class _MyHomePageState extends State<MyHomePage> {
     //       print("Error creating new user: ${e.toString()}");
     //     });
 
+    // _auth.signOut();
+
+    // _auth
+    //     .signInWithEmailAndPassword(email: email, password: password)
+    //     .then((fbUser) {
+    //       print("Sign in user => ${fbUser.user?.email} / ${fbUser.toString()}");
+    //     })
+    //     .catchError((e) {
+    //       print("Error sign in user: ${e.toString()}");
+    //     });
+
     final currentUser = _auth.currentUser;
     if (currentUser != null) {
       print("User => ${currentUser.email}");
-    }
-    else {
+    } else {
       print("No user loged in");
     }
   }
