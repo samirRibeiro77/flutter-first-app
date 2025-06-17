@@ -33,7 +33,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final _picker = ImagePicker();
-  final _storage = FirebaseStorage.instance.ref("images");
+  final _storage = FirebaseStorage.instance.ref("examples/imagePicker");
   XFile? _selectedImage;
   var _uploadingFile = false;
   var _fileUrl = "";
@@ -45,27 +45,21 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future _uploadImage() async {
+    // Always replace the image in this project because of the billing
     var task = _storage.child("photo1.jpg").putFile(File(_selectedImage!.path));
 
-    task.snapshotEvents.listen((storageEvent) {
+    task.snapshotEvents.listen((storageEvent) async {
       if (storageEvent.state == TaskState.running) {
         setState(() {
           _uploadingFile = true;
         });
       } else if (storageEvent.state == TaskState.success) {
+        var url = await task.snapshot.ref.getDownloadURL();
         setState(() {
+          _fileUrl = url;
           _uploadingFile = false;
         });
       }
-    });
-
-    task.whenComplete(() => _getImageUrl(task.snapshot));
-  }
-
-  _getImageUrl(TaskSnapshot snapshot) async {
-    var url = await snapshot.ref.getDownloadURL();
-    setState(() {
-      _fileUrl = url;
     });
   }
 
