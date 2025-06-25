@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ai_toolkit/flutter_ai_toolkit.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:sjr77_first_project/medicalGemini/chat_config.dart';
-import 'package:sjr77_first_project/medicalGemini/keys.dart';
+import 'package:sjr77_first_project/keys.dart';
 
 class MedicalChat extends StatelessWidget {
   const MedicalChat({super.key});

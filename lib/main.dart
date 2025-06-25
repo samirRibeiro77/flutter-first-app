@@ -7,6 +7,7 @@ import 'package:sjr77_first_project/executaMidia/main.dart';
 import 'package:sjr77_first_project/imagePicker/main.dart';
 import 'package:sjr77_first_project/jokenpo/main.dart';
 import 'package:sjr77_first_project/lista/main.dart';
+import 'package:sjr77_first_project/maps/main.dart';
 import 'package:sjr77_first_project/medicalGemini/main.dart';
 import 'package:sjr77_first_project/multipleScreens/first.dart';
 import 'package:sjr77_first_project/precoBitcoin/main.dart';
@@ -39,7 +40,8 @@ void main() async {
   // runApp(const AppAbas());
   // runApp(const AppVideoPlayer());
   // runApp(const AppFirebase());
-  runApp(const AppImagePicker());
+  // runApp(const AppImagePicker());
+  runApp(const AppMaps());
 
   // runApp(const MedicalChat());
 }
