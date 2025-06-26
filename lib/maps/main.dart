@@ -32,35 +32,19 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final _controller = Completer<GoogleMapController>();
-  bool _mountain = true;
 
-  static const CameraPosition _sugarLoaf = CameraPosition(
-    target: LatLng(-22.950684,-43.1610249),
-    zoom: 15.5,
-  );
-
-  static const CameraPosition _sugarLoafHike = CameraPosition(
-      bearing: 192.8334901395799,
-      target: LatLng(-22.9529811,-43.1626918),
-      tilt: 59.440717697143555,
-      zoom: 19.151926040649414);
-
-  Future<void> _goToTheClimb() async {
-    final GoogleMapController controller = await _controller.future;
-    await controller.animateCamera(CameraUpdate.newCameraPosition(_sugarLoafHike));
-
-    setState(() {
-      _mountain = false;
-    });
-  }
-
-  Future<void> _goToTheMountain() async {
-    final GoogleMapController controller = await _controller.future;
-    await controller.animateCamera(CameraUpdate.newCameraPosition(_sugarLoaf));
-
-    setState(() {
-      _mountain = true;
-    });
+  _moveCamera() async {
+    var controller = await _controller.future;
+    controller.animateCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(
+          target: LatLng(-15.802304, -47.8638722),
+          zoom: 17,
+          tilt: 45,
+          bearing: 30,
+        ),
+      ),
+    );
   }
 
   @override
@@ -68,16 +52,19 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
       body: GoogleMap(
-        mapType: MapType.hybrid,
-        initialCameraPosition: _sugarLoaf,
+        mapType: MapType.normal,
+        initialCameraPosition: CameraPosition(
+          target: LatLng(-15.802304, -47.8638722),
+          zoom: 17,
+        ),
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
         },
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _mountain ? _goToTheClimb : _goToTheMountain,
-        label: Text(_mountain ? "To the hike!" : "To the mountain!"),
-        icon: Icon(_mountain ? Icons.hiking : Icons.map_outlined),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
+      floatingActionButton: FloatingActionButton(
+        onPressed: _moveCamera,
+        child: Icon(Icons.done),
       ),
     );
   }
