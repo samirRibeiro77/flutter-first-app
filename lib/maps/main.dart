@@ -32,7 +32,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final _controller = Completer<GoogleMapController>();
+
   Set<Marker> _markers = {};
+  Set<Polygon> _polygons = {};
 
   _moveCamera() async {
     var controller = await _controller.future;
@@ -49,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   _loadMarkers() {
-    Set<Marker> markers = {};
+    Set<Marker> markerList = {};
 
     var shopping = Marker(
       markerId: MarkerId("shopping-marker"),
@@ -59,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
       rotation: 45,
       onTap: () => print("Shopping clicked"),
     );
-    markers.add(shopping);
+    markerList.add(shopping);
 
     var itamaraty = Marker(
       markerId: MarkerId("itamaraty-palace"),
@@ -68,16 +70,74 @@ class _MyHomePageState extends State<MyHomePage> {
       icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
       onTap: () => print("Itamaraty clicked"),
     );
-    markers.add(itamaraty);
+    markerList.add(itamaraty);
 
     setState(() {
-      _markers = markers;
+      _markers = markerList;
+    });
+  }
+
+  _loadPolygons() {
+    Set<Polygon> polygonList = {};
+    var polygon1 = Polygon(
+      polygonId: PolygonId("polygon-1"),
+      fillColor: Colors.transparent,
+      strokeColor: Colors.orange,
+      strokeWidth: 5,
+      points: [
+        LatLng(-15.733501, -47.893201),
+        LatLng(-15.789904, -47.889015),
+        LatLng(-15.794626, -47.875734),
+      ],
+      consumeTapEvents: true,
+      zIndex: 0,
+      onTap: () => print("North Wing")
+    );
+    polygonList.add(polygon1);
+
+    var polygon2 = Polygon(
+        polygonId: PolygonId("polygon-2"),
+        fillColor: Colors.transparent,
+        strokeColor: Colors.orange,
+        strokeWidth: 5,
+        points: [
+          LatLng(-15.835875, -47.926906),
+          LatLng(-15.793028, -47.890241),
+          LatLng(-15.796952, -47.876492),
+        ],
+        consumeTapEvents: true,
+        zIndex: 0,
+        onTap: () => print("South Wing")
+    );
+    polygonList.add(polygon2);
+
+    var polygon3 = Polygon(
+        polygonId: PolygonId("polygon-3"),
+        fillColor: Colors.transparent,
+        strokeColor: Colors.purple,
+        strokeWidth: 5,
+        points: [
+          LatLng(-15.794626, -47.875734),
+          LatLng(-15.775467, -47.937600),
+          LatLng(-15.777482, -47.938298),
+          LatLng(-15.796952, -47.876492),
+          LatLng(-15.800621, -47.861271),
+        ],
+        consumeTapEvents: true,
+        zIndex: 1,
+        onTap: () => print("Middle aeroplane")
+    );
+    polygonList.add(polygon3);
+
+    setState(() {
+      _polygons = polygonList;
     });
   }
 
   @override
   void initState() {
     _loadMarkers();
+    _loadPolygons();
 
     super.initState();
   }
@@ -96,6 +156,7 @@ class _MyHomePageState extends State<MyHomePage> {
           _controller.complete(controller);
         },
         markers: _markers,
+        polygons: _polygons,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       floatingActionButton: FloatingActionButton(
