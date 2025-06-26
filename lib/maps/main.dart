@@ -32,6 +32,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final _controller = Completer<GoogleMapController>();
+  Set<Marker> _markers = {};
 
   _moveCamera() async {
     var controller = await _controller.future;
@@ -47,6 +48,40 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  _loadMarkers() {
+    Set<Marker> markers = {};
+
+    var shopping = Marker(
+      markerId: MarkerId("shopping-marker"),
+      position: LatLng(-15.7912398, -47.8832043),
+      infoWindow: InfoWindow(title: "Norte Shopping"),
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueMagenta),
+      rotation: 45,
+      onTap: () => print("Shopping clicked"),
+    );
+    markers.add(shopping);
+
+    var itamaraty = Marker(
+      markerId: MarkerId("itamaraty-palace"),
+      position: LatLng(-15.8006794, -47.8674376),
+      infoWindow: InfoWindow(title: "Itamaraty Palace"),
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
+      onTap: () => print("Itamaraty clicked"),
+    );
+    markers.add(itamaraty);
+
+    setState(() {
+      _markers = markers;
+    });
+  }
+
+  @override
+  void initState() {
+    _loadMarkers();
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,14 +89,15 @@ class _MyHomePageState extends State<MyHomePage> {
       body: GoogleMap(
         mapType: MapType.normal,
         initialCameraPosition: CameraPosition(
-          target: LatLng(-15.802304, -47.8638722),
-          zoom: 17,
+          target: LatLng(-15.7995427, -47.8645249),
+          zoom: 15,
         ),
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
         },
+        markers: _markers,
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       floatingActionButton: FloatingActionButton(
         onPressed: _moveCamera,
         child: Icon(Icons.done),
