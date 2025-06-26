@@ -209,12 +209,31 @@ class _MyHomePageState extends State<MyHomePage> {
     return await Geolocator.getCurrentPosition();
   }
 
+  _createLocationListener() {
+    var settings = LocationSettings(
+      accuracy: LocationAccuracy.high,
+      distanceFilter: 5,
+    );
+
+    Geolocator.getPositionStream(locationSettings: settings).listen((position) {
+      setState(() {
+        _isCurrentLocation = true;
+        _cameraPosition = CameraPosition(
+          target: LatLng(position.latitude, position.longitude),
+          zoom: 16,
+        );
+      });
+      _moveCamera();
+    });
+  }
+
   @override
   void initState() {
     _loadMarkers();
     _loadPolygons();
     _loadPolylines();
-    _getCurrentLocation();
+    // _getCurrentLocation();
+    _createLocationListener();
 
     super.initState();
   }
@@ -237,7 +256,9 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       floatingActionButton: FloatingActionButton(
         onPressed: () => _isCurrentLocation ? _goTo() : _goTo(current: true),
-        child: Icon(_isCurrentLocation ? Icons.map_outlined : Icons.my_location),
+        child: Icon(
+          _isCurrentLocation ? Icons.map_outlined : Icons.my_location,
+        ),
       ),
     );
   }
