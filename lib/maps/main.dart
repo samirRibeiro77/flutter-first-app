@@ -35,6 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Set<Marker> _markers = {};
   Set<Polygon> _polygons = {};
+  Set<Polyline> _polylines = {};
 
   _moveCamera() async {
     var controller = await _controller.future;
@@ -91,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ],
       consumeTapEvents: true,
       zIndex: 0,
-      onTap: () => print("North Wing")
+      onTap: () => print("North Wing clicked")
     );
     polygonList.add(polygon1);
 
@@ -107,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
         consumeTapEvents: true,
         zIndex: 0,
-        onTap: () => print("South Wing")
+        onTap: () => print("South Wing clicked")
     );
     polygonList.add(polygon2);
 
@@ -125,7 +126,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
         consumeTapEvents: true,
         zIndex: 1,
-        onTap: () => print("Middle aeroplane")
+        onTap: () => print("Middle aeroplane clicked")
     );
     polygonList.add(polygon3);
 
@@ -134,10 +135,36 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  _loadPolylines() {
+    Set<Polyline> polylineList = {};
+    var polyline1 = Polyline(
+        polylineId: PolylineId("polyline-1"),
+        color: Colors.green,
+        width: 5,
+        startCap: Cap.buttCap,
+        endCap: Cap.buttCap,
+        jointType: JointType.mitered,
+        points: [
+          LatLng(-15.733189932116042, -47.893325066931986),
+          LatLng(-15.793846882972336, -47.88277072847316),
+          LatLng(-15.835881125542555, -47.926966038691795),
+        ],
+        consumeTapEvents: true,
+        zIndex: 0,
+        onTap: () => print("Wings clicked")
+    );
+    polylineList.add(polyline1);
+
+    setState(() {
+      _polylines = polylineList;
+    });
+  }
+
   @override
   void initState() {
     _loadMarkers();
     _loadPolygons();
+    _loadPolylines();
 
     super.initState();
   }
@@ -149,14 +176,15 @@ class _MyHomePageState extends State<MyHomePage> {
       body: GoogleMap(
         mapType: MapType.normal,
         initialCameraPosition: CameraPosition(
-          target: LatLng(-15.7995427, -47.8645249),
-          zoom: 15,
+          target: LatLng(-15.7938468, -47.8827707),
+          zoom: 20,
         ),
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
         },
         markers: _markers,
         polygons: _polygons,
+        polylines: _polylines,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       floatingActionButton: FloatingActionButton(
