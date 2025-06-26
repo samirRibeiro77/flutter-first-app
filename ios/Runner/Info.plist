@@ -49,5 +49,7 @@
     <string>Necessário permissão para acessar a galera de fotos</string>
     <key>NSPhotoLibraryUsageDescription </key>
     <string>Necessário permissão para acessar camera</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Necessário permissão para acessar a sua localização</string>
 </dict>
 </plist>
