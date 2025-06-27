@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:geocoding/geocoding.dart';
 
 class AppMaps extends StatelessWidget {
   const AppMaps({super.key});
@@ -227,13 +228,22 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  _getAddress() async {
+    List<Location> locations = await locationFromAddress("3 avenida, 140B - Núcleo Bandeirantes, Brasilia");
+    List<Placemark> placemarks = await placemarkFromCoordinates(-15.8747871, -47.9756167);
+
+    locations.forEach((location) => print("Location: ${location.toString()}"));
+    placemarks.forEach((placemark) => print("Placemark: ${placemark.toString()}"));
+  }
+
   @override
   void initState() {
     _loadMarkers();
     _loadPolygons();
     _loadPolylines();
     // _getCurrentLocation();
-    _createLocationListener();
+    // _createLocationListener();
+    _getAddress();
 
     super.initState();
   }
