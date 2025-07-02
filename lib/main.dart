@@ -11,6 +11,7 @@ import 'package:sjr77_first_project/lista/main.dart';
 import 'package:sjr77_first_project/maps/main.dart';
 import 'package:sjr77_first_project/medicalGemini/main.dart';
 import 'package:sjr77_first_project/multipleScreens/first.dart';
+import 'package:sjr77_first_project/my_apps.dart';
 import 'package:sjr77_first_project/precoBitcoin/main.dart';
 import 'package:sjr77_first_project/sharedPreferences/main.dart';
 import 'package:sjr77_first_project/testingWidgets/main.dart';
@@ -22,28 +23,69 @@ import 'firebase/main.dart';
 import 'firebase_options.dart';
 
 void main() async {
+  final appToRunName = MyApps.devicePixelRatio;
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  //runApp(const FrasesDoDia());
-  //runApp(const Jokenpo());
-  //runApp(const AlcoolGasolina());
-  //runApp(const TestingWidgetsApp());
-  //runApp(const MultipleScreens());
-  // runApp(const WebServices());
-  // runApp(const PrecoBitcoin());
-  // runApp(const AppLista());
-  // runApp(const SharedPrefs());
-  // runApp(const AppDatabase());
-  // runApp(const ExecMedia());
-  // runApp(const AppAbas());
-  // runApp(const AppVideoPlayer());
-  // runApp(const AppFirebase());
-  // runApp(const AppImagePicker());
-  // runApp(const AppMaps());
-  runApp(const DevicePixelRatioApp());
+  switch (appToRunName) {
+    case MyApps.fraseDoDia:
+      runApp(const FrasesDoDia());
+      break;
+    case MyApps.jokenpo:
+      runApp(const Jokenpo());
+      break;
+    case MyApps.alcoolOuGasolina:
+      runApp(const AlcoolGasolina());
+      break;
+    case MyApps.testWidgets:
+      runApp(const TestingWidgetsApp());
+      break;
+    case MyApps.multipleScreens:
+      runApp(const MultipleScreens());
+      break;
+    case MyApps.webService:
+      runApp(const WebServices());
+      break;
+    case MyApps.precoDoBitcoin:
+      runApp(const PrecoBitcoin());
+      break;
+    case MyApps.listaDePostagens:
+      runApp(const AppLista());
+      break;
+    case MyApps.sharedPreferences:
+      runApp(const SharedPrefs());
+      break;
+    case MyApps.appSQLiteDatabase:
+      runApp(const AppDatabase());
+      break;
+    case MyApps.executandoMidia:
+      runApp(const ExecMedia());
+      break;
+    case MyApps.abas:
+      runApp(const AppAbas());
+      break;
+    case MyApps.videoPlayer:
+      runApp(const AppVideoPlayer());
+      break;
+    case MyApps.firebase:
+      runApp(const AppFirebase());
+      break;
+    case MyApps.imagePicker:
+      runApp(const AppImagePicker());
+      break;
+    case MyApps.maps:
+      runApp(const AppMaps());
+      break;
+    case MyApps.devicePixelRatio:
+      runApp(const DevicePixelRatioApp());
+      break;
 
-  // runApp(const MedicalChat());
+    // Extra app with Gemini
+    case MyApps.chatMedicoGemini:
+      runApp(const MedicalChat());
+      break;
+  }
 }

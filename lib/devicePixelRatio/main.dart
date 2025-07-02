@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
 
 class DevicePixelRatioApp extends StatelessWidget {
   const DevicePixelRatioApp({super.key});
 
-  final title = "Seleção automatica de imagem";
+  final title = "Seleção automática de imagens";
 
   @override
   Widget build(BuildContext context) {
