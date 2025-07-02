@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sjr77_first_project/alcoolGasolina/main.dart';
 import 'package:sjr77_first_project/appAbas/main.dart';
 import 'package:sjr77_first_project/database/main.dart';
+import 'package:sjr77_first_project/devicePixelRatio/main.dart';
 import 'package:sjr77_first_project/executaMidia/main.dart';
 import 'package:sjr77_first_project/imagePicker/main.dart';
 import 'package:sjr77_first_project/jokenpo/main.dart';
@@ -41,7 +42,8 @@ void main() async {
   // runApp(const AppVideoPlayer());
   // runApp(const AppFirebase());
   // runApp(const AppImagePicker());
-  runApp(const AppMaps());
+  // runApp(const AppMaps());
+  runApp(const DevicePixelRatioApp());
 
   // runApp(const MedicalChat());
 }

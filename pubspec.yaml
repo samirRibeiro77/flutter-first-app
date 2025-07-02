@@ -91,6 +91,10 @@ flutter:
     - assets/audios/bach.mp3
     - assets/audios/musica.mp3
     - videos/exemplo.mp4
+    - assets/images/pixelRatio/icone.png
+    - assets/images/pixelRatio/2.0x/icone.png
+    - assets/images/pixelRatio/3.0x/icone.png
+    - assets/images/pixelRatio/4.0x/icone.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
