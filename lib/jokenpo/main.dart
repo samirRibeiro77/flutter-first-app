@@ -27,11 +27,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var _appChoice = AssetImage("images/padrao.png");
+  var _appChoice = AssetImage("assets/images/jokenpo/padrao.png");
   final _options = {
-    "pedra" : AssetImage("images/pedra.png"),
-    "papel" : AssetImage("images/papel.png"),
-    "tesoura" : AssetImage("images/tesoura.png"),
+    "pedra" : AssetImage("assets/images/jokenpo/pedra.png"),
+    "papel" : AssetImage("assets/images/jokenpo/papel.png"),
+    "tesoura" : AssetImage("assets/images/jokenpo/tesoura.png"),
   };
   //var _options = ["pedra", "papel", "tesoura"];
   var _result = "";
@@ -93,15 +93,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   GestureDetector(
                     onTap: () => optionSelected("pedra"),
-                    child: Image.asset("images/pedra.png", height: 95),
+                    child: Image.asset("assets/images/jokenpo/pedra.png", height: 95),
                   ),
                   GestureDetector(
                     onTap: () => optionSelected("papel"),
-                    child: Image.asset("images/papel.png", height: 95),
+                    child: Image.asset("assets/images/jokenpo/papel.png", height: 95),
                   ),
                   GestureDetector(
                     onTap: () => optionSelected("tesoura"),
-                    child: Image.asset("images/tesoura.png", height: 95),
+                    child: Image.asset("assets/images/jokenpo/tesoura.png", height: 95),
                   ),
                 ],
               ),

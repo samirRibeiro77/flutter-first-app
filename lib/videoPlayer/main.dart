@@ -36,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
 
-    _controller = VideoPlayerController.asset("videos/exemplo.mp4")
+    _controller = VideoPlayerController.asset("assets/videos/exemplo.mp4")
       ..setLooping(true)
       ..initialize().then((_) {
         setState(() {

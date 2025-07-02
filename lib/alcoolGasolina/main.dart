@@ -74,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Image.asset("images/logoCombustivel.png"),
+              Image.asset("assets/images/alcoolGasolina/logo.png"),
               Container(
                 padding: EdgeInsets.all(10),
                 child: Text(

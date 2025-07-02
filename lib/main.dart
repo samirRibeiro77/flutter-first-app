@@ -23,14 +23,14 @@ import 'firebase/main.dart';
 import 'firebase_options.dart';
 
 void main() async {
-  final appToRunName = MyApps.devicePixelRatio;
-
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  switch (appToRunName) {
+  // Choose the app first
+  final appToRun = MyApps.videoPlayer;
+  switch (appToRun) {
     case MyApps.fraseDoDia:
       runApp(const FrasesDoDia());
       break;

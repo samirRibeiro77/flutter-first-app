@@ -78,19 +78,19 @@ flutter:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   assets:
-    - images/logoFrases.png
-    - images/padrao.png
-    - images/papel.png
-    - images/pedra.png
-    - images/tesoura.png
-    - images/logoCombustivel.png
-    - images/bitcoin.png
-    - assets/images/executar.png
-    - assets/images/parar.png
-    - assets/images/pausar.png
+    - assets/images/fraseDoDia/logoFrases.png
+    - assets/images/jokenpo/padrao.png
+    - assets/images/jokenpo/papel.png
+    - assets/images/jokenpo/pedra.png
+    - assets/images/jokenpo/tesoura.png
+    - assets/images/alcoolGasolina/logo.png
+    - assets/images/precoBitcoin/bitcoin.png
+    - assets/images/executandoMidia/executar.png
+    - assets/images/executandoMidia/parar.png
+    - assets/images/executandoMidia/pausar.png
     - assets/audios/bach.mp3
     - assets/audios/musica.mp3
-    - videos/exemplo.mp4
+    - assets/videos/exemplo.mp4
     - assets/images/pixelRatio/icone.png
     - assets/images/pixelRatio/2.0x/icone.png
     - assets/images/pixelRatio/3.0x/icone.png

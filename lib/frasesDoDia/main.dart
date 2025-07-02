@@ -57,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Image.asset("images/logoFrases.png"),
+              Image.asset("assets/images/fraseDoDia/logoFrases.png"),
               Text(
                 _fraseGerada,
                 textAlign: TextAlign.center,

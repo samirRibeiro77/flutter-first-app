@@ -107,15 +107,15 @@ class _MyHomePageState extends State<MyHomePage> {
                       }
                     },
                     child: _playing
-                        ? Image.asset("assets/images/pausar.png")
-                        : Image.asset("assets/images/executar.png"),
+                        ? Image.asset("assets/images/executandoMidia/pausar.png")
+                        : Image.asset("assets/images/executandoMidia/executar.png"),
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.all(16),
                   child: GestureDetector(
                     onTap: _stopAudio,
-                    child: Image.asset("assets/images/parar.png"),
+                    child: Image.asset("assets/images/executandoMidia/parar.png"),
                   ),
                 ),
               ],

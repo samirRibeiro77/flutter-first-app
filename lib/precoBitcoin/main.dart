@@ -45,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Image.asset("images/bitcoin.png"),
+            Image.asset("assets/images/precoBitcoin/bitcoin.png"),
             FutureBuilder <Map>(
                 future: _atualizarValor(),
                 builder: (context, snapshot) {
