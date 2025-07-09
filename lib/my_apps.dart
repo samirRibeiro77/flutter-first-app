@@ -16,6 +16,7 @@ enum MyApps {
   imagePicker,
   maps,
   devicePixelRatio,
+  numberFormat,
 
   // Extra app with Gemini
   chatMedicoGemini

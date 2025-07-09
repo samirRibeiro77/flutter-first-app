@@ -12,6 +12,7 @@ import 'package:sjr77_first_project/maps/main.dart';
 import 'package:sjr77_first_project/medicalGemini/main.dart';
 import 'package:sjr77_first_project/multipleScreens/first.dart';
 import 'package:sjr77_first_project/my_apps.dart';
+import 'package:sjr77_first_project/numberFormat/main.dart';
 import 'package:sjr77_first_project/precoBitcoin/main.dart';
 import 'package:sjr77_first_project/sharedPreferences/main.dart';
 import 'package:sjr77_first_project/testingWidgets/main.dart';
@@ -29,7 +30,7 @@ void main() async {
   );
 
   // Choose the app first
-  final appToRun = MyApps.videoPlayer;
+  final appToRun = MyApps.numberFormat;
   switch (appToRun) {
     case MyApps.fraseDoDia:
       runApp(const FrasesDoDia());
@@ -81,6 +82,9 @@ void main() async {
       break;
     case MyApps.devicePixelRatio:
       runApp(const DevicePixelRatioApp());
+      break;
+    case MyApps.numberFormat:
+      runApp(const NumberFormatApp());
       break;
 
     // Extra app with Gemini
